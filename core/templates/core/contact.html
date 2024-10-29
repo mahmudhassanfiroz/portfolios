@@ -1,0 +1,125 @@
+<!-- protfolio/core/templates/core/contact.html -->
+{% comment %} <section id="contact" class="bg-light text-dark py-5">
+    <div class="container">
+        <h2 class="display-4 mb-4 text-center">Contact Us</h2>
+        
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <p class="text-center mb-4">Want to discuss your project? Get in touch with me.</p>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="contact-info">
+                    <h5 class="fw-bold">Contact Information:</h5>
+                    <p><i class="bi bi-send-fill text-danger me-2"></i> {{ site_settings.email }}</p>
+                    <p><i class="bi bi-telephone-fill text-danger me-2"></i> {{ site_settings.phone }}</p>
+                    <div class="mt-4">
+                        {% if contactdetails.linkedin_link %}
+                            <a href="{{ contactdetails.linkedin_link }}" class="text-dark me-3" target="_blank" title="LinkedIn">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                        {% endif %}
+                        {% if contactdetails.github_link %}
+                            <a href="{{ contactdetails.github_link }}" class="text-dark me-3" target="_blank" title="GitHub">
+                                <i class="bi bi-github"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                    {% if contactdetails.cv %}
+                        <a href="{{ contactdetails.cv.url }}" class="btn btn-secondary mt-4" target="_blank">Download CV</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="contact-form">
+                    <h5 class="fw-bold">Contact Form:</h5>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.name.label }}  <!-- Render label for name -->
+                            {{ form.name }}  <!-- Render name field -->
+                        </div>
+                        <div class="mb-3">
+                            {{ form.email.label }}  <!-- Render label for email -->
+                            {{ form.email }}  <!-- Render email field -->
+                        </div>
+                        <div class="mb-3">
+                            {{ form.message.label }}  <!-- Render label for message -->
+                            {{ form.message }}  <!-- Render message field -->
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit</button>  <!-- Custom submit button -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> {% endcomment %}
+
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="h2 fw-bold mb-4 text-center">Contact Us</h2>
+        
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Render form fields as paragraphs -->
+            {% comment %} <button type="submit" class="btn btn-primary">Submit</button> {% endcomment %}
+        </form>
+
+        <div class="contact-info text-center mt-4">
+            <h5>Contact Information:</h5>
+            <ul class="list-unstyled mb-5">
+                <li class="d-flex justify-content-center align-items-center mb-3">
+                    <a href="mailto:mahmudhassanfiroz90.com" class="d-flex align-items-center text-decoration-none">
+                        <i class="fas fa-envelope me-2"></i>
+                        Email: <span class="ms-1">mahmudhassanfiroz90.com</span>
+                    </a>
+                </li>
+                <li class="d-flex justify-content-center align-items-center mb-3">
+                    <a href="tel:+8801764810384" class="d-flex align-items-center text-decoration-none">
+                        <i class="fas fa-phone me-2"></i>
+                        Mobile: <span class="ms-1">+88 01764 810 384</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="social-links d-flex justify-content-center">
+                <a href="https://facebook.com/mhfirozbabu" target="_blank" class="d-flex align-items-center text-decoration-none me-3">
+                    <i class="fab fa-facebook fa-2x"></i> <!-- Increase icon size with fa-2x class -->
+                </a>
+                <a href="https://linkedin.com/in/mahmudhassanfiroz" target="_blank" class="d-flex align-items-center text-decoration-none me-3">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+                <a href="https://github.com/mahmudhassanfiroz" target="_blank" class="d-flex align-items-center text-decoration-none">
+                    <i class="fab fa-github fa-2x"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

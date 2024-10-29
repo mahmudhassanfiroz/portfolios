@@ -1,0 +1,64 @@
+<!-- protfolio/core/templates/core/about.html -->
+{% load static %}
+{% load custom_filters %}
+
+<!-- About Me Section -->
+<section id="about" class="py-5">
+    <div class="container">
+        <h2 class="h2 fw-bold mb-4 text-center">About Me</h2>
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                {% if about.profile_image %}
+                    <img src="{{ about.profile_image.url }}" alt="Profile Picture" class="img-fluid rounded-circle mb-3">
+                {% else %}
+                    <img src="{% static 'images/default-profile.jpg' %}" alt="Default Profile Picture" class="img-fluid rounded-circle mb-3">  <!-- Default profile image -->
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <p class="lead">
+                    {% for paragraph in about.bio|split:"\n" %}
+                        {{ paragraph|linebreaks }}  <!-- Convert newlines to <br> -->
+                    {% endfor %}
+                </p>  <!-- Brief description -->
+                <h5 class="fw-bold">My Skills:</h5>
+                <ul class="list-unstyled d-flex flex-wrap">
+                    {% if about.skills %}
+                        {% for skill in about.skills|split:"," %}
+                            <li class="me-3 mb-2"><i class="fas fa-check-circle text-success"></i> {{ skill|trim }}</li>  <!-- Trim whitespace -->
+                        {% endfor %}
+                    {% else %}
+                        <li><i class="fas fa-check-circle text-danger"></i> No skills available</li>  <!-- Message if no skills -->
+                    {% endif %}
+                </ul>
+                
+                <!-- Social Links Section -->
+                <h5 class="fw-bold">My Social Links:</h5>
+                <div class="d-flex">
+                    {% if about.links %}
+                        {% for link in about.links|split:"," %}
+                            {% with link_info=link|split:":" %}
+                                <a href="{{ link_info.1|trim }}" class="text-dark me-3" target="_blank" title="{{ link_info.0|trim }}">
+                                    {% if link_info.0|trim == "GitHub" %}
+                                        <img src="{% static 'images/github-logo.png' %}" alt="GitHub" style="width: 30px; height: 30px;">
+                                    {% elif link_info.0|trim == "LinkedIn" %}
+                                        <img src="{% static 'images/linkedin-logo.png' %}" alt="LinkedIn" style="width: 30px; height: 30px;">
+                                    {% else %}
+                                        {{ link_info.0|trim }}  <!-- Name of the link -->
+                                    {% endif %}
+                                </a>
+                            {% endwith %}
+                        {% endfor %}
+                    {% else %}
+                        <p>No social links available</p>
+                    {% endif %}
+                </div>
+
+                <!-- CV Section -->
+                {% if about.cv_file %}
+                    <h5 class="fw-bold mt-4">My CV:</h5>
+                    <a href="{{ about.cv_file.url }}" class="btn btn-primary" target="_blank">Download CV</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

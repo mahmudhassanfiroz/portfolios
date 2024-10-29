@@ -1,0 +1,38 @@
+<!-- protfolio/protfolios/templates/protfolios/project_list.html -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}All Projects - My Portfolio{% endblock %}
+
+{% block content %}
+<section id="projects" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="h2 fw-bold mb-4 text-center">All Projects</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for project in projects %}
+            <div class="col">
+                <div class="card h-100 project-card">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                    {% else %}
+                        <img src="{% static 'images/default-project.jpg' %}" class="card-img-top" alt="Default Project Image">
+                    {% endif %}
+                    <div class="project-info">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+                        <a href="{{ project.live_link }}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-external-link-alt"></i>  <!-- Font Awesome icon -->
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-center">No projects available.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

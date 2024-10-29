@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - {{ site_settings.site_title }}{% endblock %}
+
+{% block extra_css %}
+<style>
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-md-6 hero-content">
+                <h2 class="fs-4 mb-4">Backend Developer / Python with Django</h2>
+                <h1 class="display-4 fw-bold mb-4">
+                    Hi, I'm <span class="text-danger">Mahmud Hassan Firoz</span> <br>
+                    from Bangladesh
+                </h1>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/frz.jpg' %}" alt="Hero Image" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Me Section -->
+{% include 'core/about.html' %}
+
+<!-- Services Section -->
+{% include 'portfolio/service_list.html' %}
+<!-- Featured Projects Section -->
+<section id="projects" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="h2 fw-bold mb-4 text-center">Featured Projects</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for project in featured_projects %}
+            <div class="col">
+                <div class="card h-100 project-card">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                    {% else %}
+                        <img src="{% static 'images/default-project.jpg' %}" class="card-img-top" alt="Default Project Image">
+                    {% endif %}
+                    <div class="project-info">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+                        <a href="{{ project.live_link }}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-external-link-alt"></i>  <!-- Font Awesome icon -->
+                        </a>                    
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-center">No featured projects available.</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'portfolio:project_list' %}" class="btn btn-secondary">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+{% include 'core/contact.html' %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add additional JavaScript code here (if needed)
+</script>
+{% endblock %}

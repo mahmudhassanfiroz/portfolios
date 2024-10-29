@@ -1,0 +1,34 @@
+<!-- Testimonial Section -->
+<section id="testimonials" class="py-5 bg-light">
+    <div class="container">
+        {% comment %} <h2 class="h2 fw-bold mb-4">Client Testimonials</h2> {% endcomment %}
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for testimonial in testimonials %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <p class="card-text">"{{ testimonial.content }}"</p>
+                            <h5 class="card-title">- {{ testimonial.name }}</h5>
+                            <p class="card-subtitle text-muted">{{ testimonial.position }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Elfsight Google Review Widget -->
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+<div class="elfsight-app-53500b1c-1132-414c-8d30-9c528235f711" data-elfsight-app-lazy></div>
+

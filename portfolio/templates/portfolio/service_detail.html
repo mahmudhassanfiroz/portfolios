@@ -1,0 +1,20 @@
+<!-- protfolio/protfolios/templates/protfolios/service_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.title }} - {{ site_settings.site_title }}{% endblock %}
+
+{% block content %}
+<section id="service-detail" class="py-5">
+    <div class="container">
+        <h2 class="h2 fw-bold mb-4 text-center">{{ service.title }}</h2>
+        <div class="text-center">
+            <i class="{{ service.icon }} fa-5x mb-3 text-secondary"></i>  <!-- Font Awesome icon -->
+            <p class="lead">{{ service.description }}</p>  <!-- Full description -->
+        </div>
+        <a href="{% url 'core:home' %}#services" class="btn btn-secondary">Back to Services</a>  <!-- Back link -->
+
+        {% comment %} <a href="{% url 'protfolios:service_list' %}" class="btn btn-secondary">Back to Services</a>  <!-- Back link --> {% endcomment %}
+    </div>
+</section>
+{% endblock %}
